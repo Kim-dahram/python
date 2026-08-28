@@ -1,0 +1,4 @@
+from pop import PiezoBuzzer
+p = PiezoBuzzer()
+p.setTempo(120) #빠르기 설정(기본값이 120)
+p.tone(4,8,4) # tone(옥타브, 음계(1~14), 출력 지속시간)
