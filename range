@@ -1,0 +1,28 @@
+from pop import Potentiometer, delay, Leds
+leds = Leds()
+p = Potentiometer()
+
+while True:
+    val = p.readVoltAverage()
+    if val == 0:
+        leds.allOff()
+    elif val < 1:
+        for i in range(2):
+            leds[i].on()
+            delay(50)
+            leds[i].off()
+    elif 1 < val < 2:
+        for i in range(4):
+            leds[i].on()
+            delay(50)
+            leds[i].off()
+    elif 2 < val < 2.5:
+        for i in range(6):
+            leds[i].on()
+            delay(50)
+            leds[i].off()
+    else:
+        for i in range(8):
+            leds[i].on()
+            delay(50)
+            leds[i].off()
