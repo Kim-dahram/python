@@ -1,0 +1,37 @@
+from pop import Oled, delay, Switches
+sw = Switches()
+
+
+while True:
+    if sw[0].read() == False:
+        display = Oled(automode = False)
+        #if sw[1].read() == True:
+         #   display.clearDisplay()
+        display.drawTriangle(60,0,120,60,0,60,display.WHITE)
+        display.display()
+        display.fillTriangle(60,0,120,60,0,60,display.WHITE)
+        display.display()
+    if sw[1].read() == False:
+        display = Oled(automode = False)
+        #if sw[0].read() == True:
+         #   display.clearDisplay()
+        display.drawTriangle(0,0,120,0,60,60,display.WHITE)
+        display.display()
+        display.fillTriangle(0,0,120,0,60,60,display.WHITE)
+        display.display()
+
+
+
+
+
+
+
+from pop import Oled, delay
+
+display = Oled(automode = False)
+
+display.drawCircle(60,30,10,display.WHITE)
+display.display()
+delay(1000)
+display.fillCircle(60,30,10,display.WHITE)
+display.display()
