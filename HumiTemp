@@ -1,0 +1,15 @@
+from pop import Oled, Sht20, delay
+display = Oled()
+th = Sht20()
+display.setTextSize(1)
+
+while True:
+    
+    temp = round((th.readTemp()), 1)
+    humi = round((th.readHumi()), 1)
+    display.setCursor(25,20)
+    display.print("Temp: {}".format(temp))
+    display.setCursor(25,30)
+    display.print("Humi: {}".format(humi))
+    delay(2000)
+    display.clearDisplay()
