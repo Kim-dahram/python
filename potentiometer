@@ -1,0 +1,16 @@
+from pop import Potentiometer, delay, Leds
+leds = Leds()
+p = Potentiometer()
+
+
+while True:
+    leds.allOff()
+    
+    val = p.readVoltAverage()
+    
+    v = (val * 10) // 4
+    
+    for i in range(v):
+        leds[i].on()
+    
+    delay(500)
