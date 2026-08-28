@@ -1,0 +1,22 @@
+from pop import Gesture, delay, Leds
+gesture = Gesture()
+leds = Leds()
+leds.allOff()
+
+while True:
+    if gesture.isAvailable():
+        motion=gesture.readStr()
+        print(motion)
+        if motion == "Left":
+            leds[0].on()
+            leds[1].on()
+        elif motion == "Right":
+            leds[0].off()
+            leds[1].off()
+        elif motion == "Down":
+            leds.allOn()
+        elif motion == "Up":
+            leds.allOff()
+        
+        
+    delay(500)
