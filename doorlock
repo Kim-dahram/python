@@ -1,0 +1,92 @@
+from pop import PiezoBuzzer, Switches, delay, Leds, Oled
+
+# 장치 준비
+oled = Oled()
+sw = Switches()
+led = Leds()
+p = PiezoBuzzer()
+
+led.allOff()
+p.setTempo(120)
+
+# 처음 비밀번호
+password = "0000"
+
+
+# 성공했을 때
+def success():
+    print("비밀번호가 맞았습니다!")
+
+    p.tone(4, 20, 4)
+    p.tone(4, 20, 4)
+    p.tone(4, 20, 8)
+    p.tone(4, 17, 8)
+    p.tone(4, 27, 4)
+
+    led.allOn()
+    delay(5000)
+    led.allOff()
+
+
+# 실패했을 때
+def fail():
+    print("비밀번호가 틀렸습니다!")
+
+    p.tone(4, 10, 16)
+    p.tone(4, 10, 16)
+    p.tone(4, 10, 16)
+    p.tone(4, 10, 16)
+    p.tone(4, 10, 16)
+    p.tone(4, 10, 16)
+
+    for i in range(3):
+        led.allOn()
+        delay(200)
+
+        led.allOff()
+        delay(200)
+
+
+# 메인 프로그램
+while True:
+
+    # SW0이 눌렸을 때 → 비밀번호 변경
+    if sw[0].read() == False:
+
+        print("비밀번호 변경 모드")
+        print("새 비밀번호를 입력하세요.")
+
+        new_password = input()
+
+        print("새 비밀번호:", new_password)
+        print("SW1을 눌러 저장하세요.")
+
+        # SW1을 누를 때까지 기다림
+        while sw[1].read() == True:
+            delay(100)
+
+        # 새 비밀번호 저장
+        password = new_password
+
+        print("비밀번호 변경 완료!")
+
+        # SW1을 뗄 때까지 기다림
+        while sw[1].read() == False:
+            delay(100)
+
+        # SW0을 뗄 때까지 기다림
+        while sw[0].read() == False:
+            delay(100)
+
+    # 아무 스위치도 안 눌렸을 때 → 일반 도어락
+    else:
+
+        print("비밀번호를 입력하세요.")
+
+        input_password = input()
+
+        if input_password == password:
+            success()
+
+        else:
+            fail()
