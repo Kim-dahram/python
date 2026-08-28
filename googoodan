@@ -1,0 +1,30 @@
+rom pop import Oled, delay, Switches
+import time
+display = Oled()
+sw = Switches()
+display.setTextSize(2)
+#display.setTextColorWithBg(display.BLACK, display.WHITE)
+googoo = 1
+ex = 0
+
+while True:
+    print("몇 단을 출력할지 스위치를 누르시오")
+    set = time.time()
+    while time.time()-set < 5:
+        if sw[0].read() == False:
+            googoo += 1;
+            print(googoo)
+            set = time.time()
+            delay(200)
+            
+        
+
+                      
+    for j in range(1,10):
+        display.setCursor(5,25)
+        display.print("{} x {} = {}".format(googoo,j,(googoo*j)))
+        display.clearDisplay()
+        if j == 9:
+            googoo = 1  
+        
+    delay(1000)
