@@ -1,0 +1,17 @@
+from pop import Leds,delay,Switches
+leds = Leds()
+leds.allOff()
+
+while True:
+    try:
+        sel = int(input("몇 번 LED를 키고 싶뉘?(0~7번 입력, 종료는 999) : "))
+        if sel < 8:
+            leds[sel].on()
+            delay(1000)
+            leds[sel].off()
+        elif sel == 999:
+            break;
+        else:
+            print("0 ~ 7번을 입력하시오~!!!")
+    except ValueError:  # 정수 외 입력은 예외처리
+        print("정수를 입력하세요~!")
